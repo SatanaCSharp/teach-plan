@@ -1,18 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { BaseService } from '../common/services/base.service';
+import { BaseService } from '../common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './schema/user.schema';
+import { User, UserDocument } from './user.schema';
 import { Model } from 'mongoose';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto';
+import { UpdateUserDto } from './dto';
 
 @Injectable()
 export class UsersService extends BaseService<
   CreateUserDto,
   UpdateUserDto,
-  User
+  UserDocument
 > {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {
     super(userModel);
+  }
+
+  public findByEmail(email: string): Promise<UserDocument> {
+    return this.userModel.findOne({ email }).exec();
   }
 }

@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import * as dotenv from 'dotenv';
+import { MONGO_URL } from './common';
+import { UsersModule } from './users';
+import { AuthModule } from './auth';
 
-dotenv.config();
 @Module({
-  imports: [
-    MongooseModule.forRoot(process.env.URL_MONGO_CREDENTILS),
-    UsersModule,
-  ],
+  imports: [MongooseModule.forRoot(MONGO_URL), UsersModule, AuthModule],
 })
 export class AppModule {}

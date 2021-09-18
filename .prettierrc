@@ -1,4 +1,26 @@
 {
+  "trailingComma": "all",
+  "quoteProps": "consistent",
+  "semi": true,
   "singleQuote": true,
-  "trailingComma": "all"
+  "tabWidth": 2,
+  "endOfLine":"auto",
+  "overrides": [
+    {
+      "files": [
+        "*.json",
+        "*.yml",
+        "*.md"
+      ],
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.{ts}",
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ]
 }

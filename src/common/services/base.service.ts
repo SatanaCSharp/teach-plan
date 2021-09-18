@@ -1,31 +1,31 @@
-import { Model, Document, AnyKeys } from 'mongoose';
+import { Model, AnyKeys } from 'mongoose';
 
-export abstract class BaseService<CreateDto, UpdateDto, SchemaClassName> {
-  protected constructor(private model: Model<SchemaClassName & Document>) {}
+export abstract class BaseService<CreateDto, UpdateDto, SchemaDocument> {
+  protected constructor(private model: Model<SchemaDocument>) {}
 
-  public findAll = async (): Promise<SchemaClassName[]> => {
+  public findAll = async (): Promise<SchemaDocument[]> => {
     return this.model.find({}).exec();
   };
 
-  public findById = async (id: string): Promise<SchemaClassName> => {
+  public findById = async (id: string): Promise<SchemaDocument> => {
     return this.model.findById(id).exec();
   };
 
   public create = async (
     createDto: Readonly<CreateDto> & AnyKeys<Readonly<CreateDto>>,
-  ): Promise<SchemaClassName> => {
+  ): Promise<SchemaDocument> => {
     return this.model.create(createDto);
   };
   public createMany(
     createDtos: Array<Readonly<CreateDto> & AnyKeys<Readonly<CreateDto>>>,
-  ): Promise<SchemaClassName[]> {
+  ): Promise<SchemaDocument[]> {
     return this.model.insertMany(createDtos);
   }
-  public update(id: string, updateDto: UpdateDto): Promise<SchemaClassName> {
+  public update(id: string, updateDto: UpdateDto): Promise<SchemaDocument> {
     return this.model.findByIdAndUpdate(id, updateDto).exec();
   }
 
-  public delete(id: string): Promise<SchemaClassName> {
+  public delete(id: string): Promise<SchemaDocument> {
     return this.model.findByIdAndDelete(id).exec();
   }
 }
