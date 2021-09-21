@@ -21,8 +21,12 @@ export abstract class BaseService<CreateDto, UpdateDto, SchemaDocument> {
   ): Promise<SchemaDocument[]> {
     return this.model.insertMany(createDtos);
   }
-  public update(id: string, updateDto: UpdateDto): Promise<SchemaDocument> {
-    return this.model.findByIdAndUpdate(id, updateDto).exec();
+  public async update(
+    id: string,
+    updateDto: UpdateDto,
+  ): Promise<SchemaDocument> {
+    await this.model.findByIdAndUpdate(id, updateDto).exec();
+    return this.findById(id);
   }
 
   public delete(id: string): Promise<SchemaDocument> {

@@ -21,7 +21,7 @@ export class NotFoundInterceptor implements NestInterceptor {
           (isObject(value) && isEmpty(value))
         ) {
           throw new HttpException(
-            'Cannot find target target entity',
+            'There are no entities by query',
             HttpStatus.NOT_FOUND,
           );
         }

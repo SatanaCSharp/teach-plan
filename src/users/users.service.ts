@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
+
 import { BaseService } from '../common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
 import { Model } from 'mongoose';
-import { CreateUserDto } from './dto';
-import { UpdateUserDto } from './dto';
+import { CreateUserDto, UpdateUserDto } from './dto';
 
 @Injectable()
 export class UsersService extends BaseService<
