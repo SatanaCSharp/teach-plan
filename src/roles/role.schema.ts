@@ -1,10 +1,11 @@
 import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { BaseSchema } from '../common';
 
 export type RoleDocument = Role & Document;
 
 @Schema()
-export class Role {
+export class Role extends BaseSchema {
   @Prop(String)
   name: string;
 
@@ -13,9 +14,6 @@ export class Role {
 
   @Prop([String])
   permissions: [];
-
-  @Prop({ type: Date, required: true, default: Date.now() })
-  createdAt: Date;
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

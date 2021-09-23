@@ -3,19 +3,19 @@ import { Model, AnyKeys } from 'mongoose';
 export abstract class BaseService<CreateDto, UpdateDto, SchemaDocument> {
   protected constructor(private model: Model<SchemaDocument>) {}
 
-  public findAll = async (): Promise<SchemaDocument[]> => {
+  public async findAll(): Promise<SchemaDocument[]> {
     return this.model.find({}).exec();
-  };
+  }
 
-  public findById = async (id: string): Promise<SchemaDocument> => {
+  public async findById(id: string): Promise<SchemaDocument> {
     return this.model.findById(id).exec();
-  };
+  }
 
-  public create = async (
+  public async create(
     createDto: Readonly<CreateDto> & AnyKeys<Readonly<CreateDto>>,
-  ): Promise<SchemaDocument> => {
+  ): Promise<SchemaDocument> {
     return this.model.create(createDto);
-  };
+  }
   public createMany(
     createDtos: Array<Readonly<CreateDto> & AnyKeys<Readonly<CreateDto>>>,
   ): Promise<SchemaDocument[]> {

@@ -17,6 +17,10 @@ export class UsersService extends BaseService<
   }
 
   public findByEmail(email: string): Promise<UserDocument> {
-    return this.userModel.findOne({ email }).exec();
+    return this.userModel.findOne({ email }).populate('role').exec();
+  }
+
+  public findAll(): Promise<UserDocument[]> {
+    return this.userModel.find({}).populate('role').exec();
   }
 }

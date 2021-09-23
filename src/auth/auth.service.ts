@@ -40,7 +40,10 @@ export class AuthService {
   }
 
   public generateAccessToken(userDocument: UserDocument): string {
-    const payload = { id: userDocument._id };
+    const payload = {
+      id: userDocument._id,
+      permissions: userDocument.role?.permissions || [],
+    };
     return this.jwtService.sign(payload);
   }
 }
